@@ -3,10 +3,10 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import datetime
 
-def sendemail(subject, body, toemail):
+def send_email(subject, body, to_email):
     # Set up the SMTP server
-    smtpserver = smtplib.SMTP('smtp.example.com', 587)  # Change to your SMTP server and port
-    smtpserver.starttls()
+    smtp_server = smtplib.SMTP('smtp.example.com', 587)  # Change to your SMTP server and port
+    smtp_server.starttls()
     smtp_server.login('your_email@example.com', 'your_password')  # Change to your email and password
 
     # Create message container
@@ -31,7 +31,7 @@ def generate_daily_report():
 
     return report
 
-if __name == "__main":
+if __name__ == "__main__":
     # Set up email parameters
     to_email = 'recipient@example.com'  # Change to recipient's email
     subject = 'Daily Report'

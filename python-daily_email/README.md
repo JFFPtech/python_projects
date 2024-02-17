@@ -1,37 +1,34 @@
-Daily Email Report Automation
+# Daily Report Email Sender
 
-This script automates the process of sending a daily email report to a specified recipient using Python.
-Prerequisites
+This Python script sends a daily report via email using SMTP. It generates a daily report and sends it to a specified recipient's email address.
 
-Before running the script, ensure you have the following installed:
+## Setup
 
-    Python 3.x
-    smtplib module (can be installed via pip)
-    email module (can be installed via pip)
+1. **SMTP Server Configuration**: Replace `'smtp.example.com'` with your SMTP server address and `'587'` with the appropriate port number. Also, replace `'your_email@example.com'` with your email address and `'your_password'` with your email password.
 
-Configuration
+2. **Recipient Email Address**: Replace `'recipient@example.com'` with the recipient's email address to whom you want to send the daily report.
 
-    Open the send_daily_report.py script in a text editor.
-    Update the following variables with your own information:
-        smtp_server: Set this to the address of your SMTP server.
-        smtp_port: Set this to the port number of your SMTP server.
-        sender_email: Set this to your email address.
-        sender_password: Set this to your email password or an app-specific password if applicable.
-        recipient_email: Set this to the email address where you want to send the daily reports.
+## Usage
 
-Usage
+Run the script by executing the following command:
 
-To send the daily report, simply run the send_daily_report.py script:
+```bash
+python script.py
+```
 
-python send_daily_report.py
+The script will generate a daily report and send it to the specified recipient's email address.
 
-Customization
+## Dependencies
 
-You can customize the content of the daily report by modifying the generate_daily_report() function in the script. This function should return a string containing the report content.
-License
+- Python 3.x
+- `smtplib` library
+- `email` library
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-Acknowledgements
+## File Structure
 
-    This script was inspired by the need to automate the process of sending daily reports.
-    Special thanks to the developers of the smtplib and email modules for providing the tools necessary for email automation in Python.
+- `script.py`: Python script for generating and sending the daily report.
+- `README.md`: Markdown file providing information about the script.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
