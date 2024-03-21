@@ -31,7 +31,8 @@ pip install beautifulsoup4 pandas requests apscheduler
 4. Run the script using the following command:
 
 ```
-python web_scraping.py
+python script_name.py <Wikipedia_URL> <output_file_name.csv>
+
 ```
 
 ## Features
@@ -43,10 +44,6 @@ python web_scraping.py
 ## Customization
 
 You can customize the scraping logic and data processing steps according to the structure and content of the website you are scraping.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgements
 
