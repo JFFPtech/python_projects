@@ -48,6 +48,10 @@ def scrape_wikipedia_page(url):
         
         return data
         
+    except requests.exceptions.RequestExceptions as e:
+        logging.error("An error occurred while sending the URL request: %s", str(e))
+        raise 
+    
     except Exception as e:
         logging.error("An error occurred while scraping the Wikipedia page: %s", str(e))
         return []
@@ -80,11 +84,16 @@ def main():
     # Load configuration from file
     config = load_config(args.config)
 
-    # Scrape data from the Wikipedia page
-    data = scrape_wikipedia_page(config['url'])
+    
+    try:
+        # Scrape data from the Wikipedia page
+        data = scrape_wikipedia_page(config['url'])
 
-    # Save the scraped data to a CSV file
-    save_to_csv(data, config['output_file'])
+        # Save the scraped data to a CSV file
+        save_to_csv(data, config['output_file'])
+    
+    except Exception as e:
+        logging.error("An error occurred during execution: %s", str(e))
 
 if __name__ == "__main__":
     main()

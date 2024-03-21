@@ -1,0 +1,5 @@
+{
+    "url": "https://en.wikipedia.org/wiki/Artificial_intelligence",
+    "output_file": "scraped_data.csv",
+    "schedule_interval": "daily"
+}
