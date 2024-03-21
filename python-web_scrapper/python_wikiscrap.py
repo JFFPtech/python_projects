@@ -1,7 +1,11 @@
 import requests
 import argparse
+import logging
 from bs4 import BeautifulSoup
 import pandas as pd
+
+# Configure logging
+logging.basicConfig(filename='scraping.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def scrape_wikipedia_page(url):
     """
