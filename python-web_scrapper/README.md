@@ -40,10 +40,18 @@ python script_name.py <Wikipedia_URL> <output_file_name.csv>
 - **Scheduling**: Automatically scrape data at specified intervals using the APScheduler library.
 - **Data Cleaning**: Implement data cleaning and transformation logic as needed within the `scrape_data()` function.
 - **Error Handling**: Handle errors gracefully using try-except blocks and logging to ensure robustness.
+- **Logging**: We've imported the logging module and configured basic logging settings using basicConfig().
 
 ## Customization
 
 You can customize the scraping logic and data processing steps according to the structure and content of the website you are scraping.
+
+## Running Updates 
+
+- **Logging**:     We've imported the logging module and configured basic logging settings using basicConfig(). Logs will be written to a file named scraping.log, with a logging level of INFO.
+    We've added logging statements to record important events such as successful data scraping and errors encountered during scraping or saving to CSV.
+    When an error occurs during scraping or saving, the error message is logged with the ERROR level.
+    Logging allows us to track the execution of the script and diagnose any issues that may arise.
 
 ## Acknowledgements
 
