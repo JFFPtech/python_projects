@@ -1,4 +1,5 @@
 import requests
+import argparse
 from bs4 import BeautifulSoup
 import pandas as pd
 
@@ -52,15 +53,17 @@ def save_to_csv(data, output_file):
     except Exception as e:
         print("An error occurred while saving data to CSV:", str(e))
 
-if __name__ == "__main__":
-    # URL of the Wikipedia page to scrape
-    wikipedia_url = 'https://en.wikipedia.org/wiki/Artificial_intelligence'
+def main():
+    parser = argparse.ArgumentParser(description="Scrape data from a Wikipedia page and save it to a CSV file")
+    parser.add_argument("url", help="The URL of the Wikipedia page to scrape")
+    parser.add_argument("output_file", help="The filename for the output CSV file")
+    args = parser.parse_args()
 
-    # Output file for storing the scraped data
-    output_file = 'wikipedia_ai_data.csv'
-    
     # Scrape data from the Wikipedia page
-    scraped_data = scrape_wikipedia_page(wikipedia_url)
-    
-    # Save scraped data to a CSV file
-    save_to_csv(scraped_data, output_file)
+    data = scrape_wikipedia_page(args.url)
+
+    # Save the scraped data to a CSV file
+    save_to_csv(data, args.output_file)
+
+if __name__ == "__main__":
+    main()
