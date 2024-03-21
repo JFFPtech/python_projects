@@ -1,6 +1,6 @@
 # Web Scraping Application
 
-This Python script/application allows you to scrape data from websites and store it in a structured format. It includes features such as scheduling, data cleaning, and error handling.
+This Python script/application allows you to scrape data from websites and store it in a structured format. It includes features such as scheduling, data cleaning, error handling, logging, MySQL integration, and configuration file usage.
 
 ## Prerequisites
 
@@ -11,6 +11,7 @@ Before running the script, ensure you have the following installed:
 - Pandas module (can be installed via pip)
 - Requests module (can be installed via pip)
 - APScheduler module (can be installed via pip)
+- MySQL Connector module (can be installed via pip)
 
 ## Installation
 
@@ -27,8 +28,9 @@ pip install beautifulsoup4 pandas requests apscheduler
    - `URL`: Set this to the URL of the website you want to scrape.
    - `output_file`: Set this to the desired filename/path for storing the scraped data (e.g., CSV, JSON, or database).
    - `schedule_interval`: Set this to the desired interval for scraping data (e.g., 'hourly', 'daily', etc.).
-3. Customize the scraping logic in the `scrape_data()` function to extract the desired data from the website.
-4. Run the script using the following command:
+3. Customize the scraping logic in the `scrape_wikipedia_page()` function to extract the desired data from the website.
+4. Set up MySQL database configuration in `mysql_config.json`.
+5. Run the script using the following command:
 
 ```
 python script_name.py <Wikipedia_URL> <output_file_name.csv>
@@ -38,22 +40,17 @@ python script_name.py <Wikipedia_URL> <output_file_name.csv>
 ## Features
 
 - **Scheduling**: Automatically scrape data at specified intervals using the APScheduler library.
-- **Data Cleaning**: Implement data cleaning and transformation logic as needed within the `scrape_data()` function.
+- **Data Cleaning**: Implement data cleaning and transformation logic as needed within the `scrape_wikipedia_page()` function.
 - **Error Handling**: Handle errors gracefully using try-except blocks and logging to ensure robustness.
-- **Logging**: We've imported the logging module and configured basic logging settings using basicConfig().
+- **Logging**: Logs are written to a file named `scraping.log`, with logging levels INFO and ERROR.
+- **MySQL Integration**: Store scraped data in a MySQL database.
+- **Configuration Files**: Utilize JSON configuration files to manage parameters such as URL, output file name, and MySQL database credentials.
 
 ## Customization
 
-You can customize the scraping logic and data processing steps according to the structure and content of the website you are scraping.
-
-## Running Updates 
-
-- **Logging**:     We've imported the logging module and configured basic logging settings using basicConfig(). Logs will be written to a file named scraping.log, with a logging level of INFO.
-    We've added logging statements to record important events such as successful data scraping and errors encountered during scraping or saving to CSV.
-    When an error occurs during scraping or saving, the error message is logged with the ERROR level.
-    Logging allows us to track the execution of the script and diagnose any issues that may arise.
+You can customize the scraping logic, error handling, and data processing steps according to the structure and content of the website you are scraping.
 
 ## Acknowledgements
 
 - This project was inspired by the need to automate the process of scraping data from websites.
-- Special thanks to the developers of BeautifulSoup, Pandas, Requests, and APScheduler for providing the tools necessary for web scraping and scheduling in Python.
+- Special thanks to the developers of BeautifulSoup, Pandas, Requests, APScheduler, and MySQL Connector for providing the tools necessary for web scraping, scheduling, and database integration in Python.
