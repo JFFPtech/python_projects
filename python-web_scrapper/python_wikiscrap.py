@@ -1,11 +1,26 @@
 import requests
 import argparse
 import logging
+import json
 from bs4 import BeautifulSoup
 import pandas as pd
 
 # Configure logging
 logging.basicConfig(filename='scraping.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+def load_config(config_file):
+    """
+    Load configuration parameters from a JSON file.
+    
+    Parameters:
+        config_file (str): The filename of the JSON configuration file.
+    
+    Returns:
+        dict: A dictionary containing the configuration parameters.
+    """
+    with open(config_file, 'r') as f:
+        config = json.load(f)
+    return config
 
 def scrape_wikipedia_page(url):
     """
@@ -34,7 +49,7 @@ def scrape_wikipedia_page(url):
         return data
         
     except Exception as e:
-        print("An error occurred while scraping the Wikipedia page:", str(e))
+        logging.error("An error occurred while scraping the Wikipedia page: %s", str(e))
         return []
 
 def save_to_csv(data, output_file):
@@ -52,22 +67,24 @@ def save_to_csv(data, output_file):
         # Write the DataFrame to the output file
         df.to_csv(output_file, index=False)
         
-        print("Data scraped successfully and saved to", output_file)
+        logging.info("Data scraped successfully and saved to %s", output_file)
         
     except Exception as e:
-        print("An error occurred while saving data to CSV:", str(e))
+        logging.error("An error occurred while saving data to CSV: %s", str(e))
 
 def main():
     parser = argparse.ArgumentParser(description="Scrape data from a Wikipedia page and save it to a CSV file")
-    parser.add_argument("url", help="The URL of the Wikipedia page to scrape")
-    parser.add_argument("output_file", help="The filename for the output CSV file")
+    parser.add_argument("--config", default="config.json", help="The filename of the JSON configuration file")
     args = parser.parse_args()
 
+    # Load configuration from file
+    config = load_config(args.config)
+
     # Scrape data from the Wikipedia page
-    data = scrape_wikipedia_page(args.url)
+    data = scrape_wikipedia_page(config['url'])
 
     # Save the scraped data to a CSV file
-    save_to_csv(data, args.output_file)
+    save_to_csv(data, config['output_file'])
 
 if __name__ == "__main__":
     main()
