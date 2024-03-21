@@ -4,6 +4,7 @@ import logging
 import json
 import mysql.connector
 from bs4 import BeautifulSoup
+import os.path
 import pandas as pd
 
 # Configure logging
@@ -86,11 +87,17 @@ def save_to_csv(data, output_file):
         output_file (str): The filename for the output CSV file.
     """
     try:
+        # Check if the file exists
+        file_exists = os.path.isfile(output_file)
+
+        # If the file exists, append data to it; otherwise, create a new file
+        mode = 'a' if file_exists else 'w'
+        
         # Create a DataFrame from the scraped data
         df = pd.DataFrame(data, columns=['Text'])
 
         # Write the DataFrame to the output file
-        df.to_csv(output_file, index=False)
+        df.to_csv(output_file, mode=mode, index=False, header=not file_exists)
         
         logging.info("Data scraped successfully and saved to %s", output_file)
         
@@ -107,9 +114,6 @@ def save_to_mysql(data, connection):
     """
     try:
         cursor = connection.cursor()
-
-        # Create table if not exists
-        cursor.execute("CREATE TABLE IF NOT EXISTS scraped_data (id INT AUTO_INCREMENT PRIMARY KEY, text TEXT)")
 
         # Insert data into the table
         for item in data:
